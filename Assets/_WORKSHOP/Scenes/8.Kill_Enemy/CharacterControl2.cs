@@ -132,6 +132,7 @@ public class CharacterControl2 : MonoBehaviour
         m_animator.SetFloat("Speed", Mathf.Abs(m_speedHorizontal) / m_moveSpeed);
         m_animator.SetBool("Ground", m_isGround);
         curveSpeedX.AddKey(Time.realtimeSinceStartup, m_speedHorizontal);
+        curveSpeedY.AddKey(Time.realtimeSinceStartup, m_rigidBody2D.velocity.y);
         m_rigidBody2D.velocity = new Vector2(m_speedHorizontal, m_rigidBody2D.velocity.y);
     }
 
@@ -141,7 +142,7 @@ public class CharacterControl2 : MonoBehaviour
     {
         Vector2 vel = m_rigidBody2D.velocity;
         vel.y = speedY;
-        curveSpeedY.AddKey(Time.realtimeSinceStartup, speedY);
+        
         m_rigidBody2D.velocity = vel;
     }
 
