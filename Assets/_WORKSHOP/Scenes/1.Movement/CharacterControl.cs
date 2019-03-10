@@ -18,15 +18,12 @@ public class CharacterControl : MonoBehaviour
     public float accelerationSpeed = 2f;
     public float decelerationSpeed = 2f;
 
-    private float speedHorizontal;
+    private float m_currentSpeed;
 
-
-    private bool m_isGround = true;
     private Rigidbody2D m_rigidbody2D;
     
     private Animator m_animator;
     private SpriteRenderer m_spriteRenderer;
-    private float m_previousSign = 1f;
 
     void Awake()
     {
@@ -50,13 +47,13 @@ public class CharacterControl : MonoBehaviour
         if (Mathf.Abs(horizontalMove) > 0.001f)
         {
             float targetSpeed = sign * Speed;
-            float maxDeltaTime = Time.deltaTime * (accelerationSpeed + (Mathf.Sign(speedHorizontal) != sign ? decelerationSpeed : 0));
+            float maxDeltaChange = Time.deltaTime * (accelerationSpeed + (Mathf.Sign(m_currentSpeed) != sign ? decelerationSpeed : 0));
 
-            speedHorizontal = Mathf.MoveTowards(speedHorizontal, targetSpeed, maxDeltaTime);
+            m_currentSpeed = Mathf.MoveTowards(m_currentSpeed, targetSpeed, maxDeltaChange);
         }
         else
         {
-            speedHorizontal = Mathf.MoveTowards(speedHorizontal, 0f, Time.deltaTime * decelerationSpeed);
+            m_currentSpeed = Mathf.MoveTowards(m_currentSpeed, 0f, Time.deltaTime * decelerationSpeed);
         }
 
         // If the input is moving the player right and the player is facing left...
@@ -72,8 +69,8 @@ public class CharacterControl : MonoBehaviour
             Flip();
         }
 
-        m_animator.SetFloat("Speed",  Mathf.Abs(speedHorizontal) / Speed);
-        m_rigidbody2D.velocity = new Vector2(speedHorizontal, m_rigidbody2D.velocity.y);
+        m_animator.SetFloat("Speed",  Mathf.Abs(m_currentSpeed) / Speed);
+        m_rigidbody2D.velocity = new Vector2(m_currentSpeed, m_rigidbody2D.velocity.y);
     }
 
     void Flip()

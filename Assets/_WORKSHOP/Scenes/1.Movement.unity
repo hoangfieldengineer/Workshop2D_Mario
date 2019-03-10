@@ -8637,5 +8637,10 @@ PrefabInstance:
       propertyPath: m_AngularDrag
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 9090795791271042658, guid: 3369cf7c2e77c764a813784f3cecdaf6,
+        type: 3}
+      propertyPath: m_SortingLayerID
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3369cf7c2e77c764a813784f3cecdaf6, type: 3}

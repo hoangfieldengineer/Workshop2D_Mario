@@ -82,7 +82,7 @@ public class CharacterControl1 : MonoBehaviour
             SetSpeedY(force);
             m_accumulatedDurationSinceJump += Time.deltaTime;
         }
-        else if (m_isGround)
+        else // if (m_isGround)
         {
             m_accumulatedDurationSinceJump = 0f;
         }
@@ -103,13 +103,13 @@ public class CharacterControl1 : MonoBehaviour
             m_speedHorizontal = Mathf.MoveTowards(m_speedHorizontal, targetSpeed, maxDeltaTime);
 
             // If the input is moving the player right and the player is facing left...
-            if (sign > 0 && m_spriteRenderer.flipX)
+            if (horizontalMove > 0 && m_spriteRenderer.flipX)
             {
                 // ... flip the player.
                 Flip();
             }
             // Otherwise if the input is moving the player left and the player is facing right...
-            else if (sign < 0 && !m_spriteRenderer.flipX)
+            else if (horizontalMove < 0 && !m_spriteRenderer.flipX)
             {
                 // ... flip the player.
                 Flip();
